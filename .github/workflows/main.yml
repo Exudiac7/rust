@@ -1,0 +1,27 @@
+name: rustdesk-download-run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rustdesk:
+    runs-on: windows-latest
+
+    steps:
+    - name: Download PowerShell script
+      shell: pwsh
+      run: |
+        $url = "https://raw.githubusercontent.com/Exudiac7/rust/refs/heads/main/scripts/rusdtdesk.ps1"
+        $scriptPath = "$env:TEMP\rusdtdesk.ps1"
+
+        Write-Host "[+] Downloading script from $url"
+        Invoke-WebRequest -Uri $url -OutFile $scriptPath
+
+        Write-Host "[+] Script saved to $scriptPath"
+        Get-Item $scriptPath
+
+    - name: Run PowerShell script
+      shell: pwsh
+      run: |
+        $scriptPath = "$env:TEMP\rustdesk.ps1"
+        pwsh -NoProfile -ExecutionPolicy Bypass -File $scriptPath
