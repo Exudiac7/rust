@@ -1,0 +1,29 @@
+name: rustdesk
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rustdesk:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Debug workspace
+      shell: pwsh
+      run: |
+        Write-Host "Workspace = $env:GITHUB_WORKSPACE"
+        Get-ChildItem -Recurse
+
+    - name: Run RustDesk PowerShell script
+      shell: pwsh
+      run: |
+        pwsh -NoProfile -ExecutionPolicy Bypass -File "$env:GITHUB_WORKSPACE\scripts\rustdesk.ps1"
+
+    - name: Upload credentials file
+      uses: actions/upload-artifact@v4
+      with:
+        name: rustdesk-output
+        path: RustDesk_Credentials.txt
