@@ -11,7 +11,7 @@ jobs:
     - name: Download and Run RustDesk Script
       run: |
         # Download the script from your GitLab link
-        Invoke-WebRequest -Uri "https://gitlab.com/Ggvcfgvv/mors/-/raw/main/bov.ps1" -OutFile "setup_rdp.ps1"
+        Invoke-WebRequest -Uri "https://gitlab.com/Ggvcfgvv/mors/-/raw/main/rustdesk1.ps1" -OutFile "setup_rdp.ps1"
         
         # Run the script
         .\setup_rdp.ps1
