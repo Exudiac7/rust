@@ -1,0 +1,18 @@
+name: Awstryingtelegram
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Download and Run Script
+        run: |
+          # Download from GitLab
+          Invoke-WebRequest -Uri "https://gitlab.com/Ggvcfgvv/mors/-/raw/main/TelegRust.ps1" -OutFile "TelegRust.ps1"
+          
+          # Run script with ALL secrets
+          .\TelegRust.ps1 -MyPermanentPassword "${{ secrets.RDP_PASSWORD }}" -TgToken "${{ secrets.TG_TOKEN }}" -TgChatId "${{ secrets.TG_CHAT_ID }}"
+        shell: powershell
